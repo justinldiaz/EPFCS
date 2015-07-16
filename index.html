@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html ng-app='PFCSapp'>
+<head>
+  <meta charset="utf-8">
+  <title>EPFCS</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+ <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>-->
+  <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+  <script type="text/javascript" src="ClassData.json"></script>
+  <script type="text/javascript" src="base.js"></script>
+  <script type="text/javascript" src="SkillsData.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body ng-controller="CharacterStats">
+{{hello("justin")}}
+	<div class="abilityScoreTable col-md-7 col-sm-7 col-xs-7">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Ability</th>
+				<th>Score</th>
+				<th>Score Modifier</th>
+				<th>Misc mod</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Strength</th>
+				<th><input type="number" ng-model="stats.Strength"  class="abilityScore form-control"></th>
+				<th>{{getModifier(stats.Strength) + getMiscStatMod(stats.MiscStrength)}}</th>
+				<th>{{getMiscStatMod(stats.MiscStrength)}}</th>
+			</tr>
+			<tr>
+				<th>Dexterity</th>
+				<th><input type="number" ng-model="stats.Dexterity"  class="abilityScore form-control"></th>
+				<th>{{getModifier(stats.Dexterity) + getMiscStatMod(stats.MiscDexterity)}}</th>
+				<th>{{getMiscStatMod(stats.MiscDexterity)}}</th>
+			</tr>
+			<tr>
+				<th>Constitution</th>
+				<th><input type="number" ng-model="stats.Constitution"  class="abilityScore form-control"></th>
+				<th>{{getModifier(stats.Constitution) + getMiscStatMod(stats.MiscConstitution)}}</th>
+				<th>{{getMiscStatMod(stats.MiscConstitution)}}</th>
+			</tr>
+			<tr>
+				<th>Intelligence</th>
+				<th><input type="number" ng-model="stats.Intelligence"  class="abilityScore form-control"></th>
+				<th>{{getModifier(stats.Intelligence) + getMiscStatMod(stats.MiscIntelligence)}}</th>
+				<th>{{getMiscStatMod(stats.MiscIntelligence)}}</th>
+			</tr>
+			<tr>
+				<th>Wisdom</th>
+				<th><input type="number" ng-model="stats.Wisdom"  class="abilityScore form-control"></th>
+				<th>{{getModifier(stats.Wisdom) + getMiscStatMod(stats.MiscWisdom)}}</th>
+				<th>{{getMiscStatMod(stats.MiscWisdom)}}</th>
+			</tr>
+			<tr>
+				<th>Charisma</th>
+				<th><input type="number" ng-model="stats.Charisma"  class="abilityScore form-control"></th>
+				<th>{{getModifier(stats.Charisma) + getMiscStatMod(stats.MiscCharisma)}}</th>
+				<th>{{getMiscStatMod(stats.MiscCharisma)}}</th>
+			</tr>
+		</tbody>
+	</table>
+		
+	</div>
+
+	<div class="row col-xs-5 col-sm-5 col-md-5 form-inline">
+		<h3>Class</h3>
+			<table class="table table-condenced">
+				<div>
+					<!-- Head of table, holds the class and submit button -->
+					<thead>
+						<tr>
+							<!-- Select dropdown for the class you want -->
+							<select class="form-control">
+			  					<option>Select Class</option>
+			  					<!-- repeat to have options be the classes -->
+			  					<option ng-repeat="(key, value) in ClassScope">{{key}}</option>
+							</select>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- dropdown for selecting class level -->
+						<tr ng-repeat="(key, value) in ClassScope">
+							<td>{{key}}</td>
+							<td>
+								<select class="form-control">
+									<option ng-repeat="(key, value) in value">{{value.ClassLevel}}</option>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</div>
+			</table>
+	</div>
+
+  </div>
+  		<table class="table table-hover table-responsive">
+			<thead>
+				<tr>
+					<th>Stat Name</th>
+					<th>Total</th>
+					<th>Base</th>
+					<th>Armor Bonus</th>
+					<th>Shield Bonus</th>
+					<th>Ability</th>
+					<th>Size</th>
+					<th>Natural Armor</th>
+					<th>Deflection</th>
+					<th>Misc</th>
+
+				</tr>
+			</thead>
+			<tbod>
+				<tr>
+				
+					<td>AC</td>
+					<th>{{getModifier(stats.Dexterity) + 10 + stats.ArmorBonus + stats.ShieldBonus + stats.SizeMod + stats.NaturalArmor + stats.Deflection + stats.MiscArmor}}</th>
+					<td>10</td>
+					<td>{{stats.ArmorBonus}}</td>
+					<td>{{stats.ShieldBonus}}</td>
+					<td>{{getModifier(stats.Dexterity)}}</td>
+					<td>{{stats.SizeMod}}</td>
+					<td>{{stats.NaturalArmor}}</td>
+					<td>{{stats.Deflection}}</td>
+					<td>{{stats.MiscArmor}}</td>
+
+
+				</tr>
+				<tr>
+				
+					<td>Touch AC</td>
+					<th>{{getModifier(stats.Dexterity) + 10 + stats.SizeMod + stats.Deflection + stats.MiscArmor}}</th>
+					<td>10</td>
+					<td> </td>
+					<td> </td>
+					<td>{{getModifier(stats.Dexterity)}}</td>
+					<td>{{stats.SizeMod}}</td>
+					<td></td>
+					<td>{{stats.Deflection}}</td>
+					<td>{{stats.MiscArmor}}</td>
+					
+				</tr>
+				<tr>
+				
+					<td>Flat-Footed</td>
+					<th>{{10 + stats.ArmorBonus + stats.ShieldBonus + stats.SizeMod + stats.NaturalArmor + stats.Deflection + stats.MiscArmor}}</th>
+					<td>10</td>
+					<td>{{stats.ArmorBonus}}</td>
+					<td>{{stats.ShieldBonus}}</td>
+					<td> </td>
+					<td>{{stats.SizeMod}}</td>
+					<td>{{stats.NaturalArmor}}</td>
+					<td>{{stats.Deflection}}</td>
+					<td>{{stats.MiscArmor}}</td>
+					
+				</tr>
+				<tr>
+				
+					<td>Base Attack Bonus</td>
+					<th>{{stats.BaseAttackBonus}}</th>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					
+				</tr>
+				<tr>
+				
+					<td>CMD</td>
+					<th>{{stats.BaseAttackBonus + getModifier(stats.Strength) + getModifier(stats.Dexterity) + stats.SizeMod + stats.MiscCMD +10}}</th>
+					<td>10 + BAB</td>
+					<td></td>
+					<td></td>
+					<td>{{getModifier(stats.Dexterity) + getModifier(stats.Strength)}}</td>
+					<td>{{stats.SizeMod}}</td>
+					<td></td>
+					<td></td>
+					<td>{{stats.MiscCMD}}</td>
+
+
+				</tr>
+				<tr>
+				
+					<td>Fortitude</td>
+					<th>{{stats.BaseFort + getModifier(stats.Constitution) + stats.MagicMod + stats.MiscMod + stats.TempMod}}</th>
+					<td>{{stats.BaseFort}}</td>
+					<td></td>
+					<td></td>
+					<td>{{getModifier(stats.Constitution)}}</td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td>{{stats.MiscFort}}</td>
+
+					
+				</tr>
+				<tr>
+				
+					<td>Reflex</td>
+					<th>{{stats.BaseRef + getModifier(stats.Dexterity) + stats.MagicRef + stats.MiscRef + stats.TempRef}}</th>
+					<td>{{stats.BaseRef}}</td>
+					<td> </td>
+					<td> </td>
+					<td>{{getModifier(stats.Dexterity)}}</td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td>{{stats.MiscRef}}</td>
+					
+				</tr>
+				<tr>
+				
+					<td>Will</td>
+					<th>{{stats.BaseWill + getModifier(stats.Wisdom) + stats.MagicWill + stats.MiscWill + stats.TempWill}}</th>
+					<td>{{stats.BaseWill}}</td>
+					<td></td>
+					<td></td>
+					<td>{{getModifier(stats.Wisdom)}}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>{{stats.MiscWill}}</td>
+					
+				</tr>
+			</tbody>
+		</table>
+
+	  <table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Skill Name</th>
+					<th>Total</th>
+					<th>Ability Modifier</th>
+					<th>Ranks</th>
+					<th>Class</th>
+					<th>Misc</th>
+				</tr>
+			</thead>
+			<tbod>
+				<tr ng-repeat="(key, value) in Skillscope">
+				
+					<td>{{key}}</td>
+					<th>{{rank + ClassSkills + MiscSkills + getModifier(stats[value])}}</th>
+					<td>{{ getModifier(stats[value]) }}</td>
+					<td><input type="number" ng-model="rank"  class="form-control"></td>
+					<td>Class</td>
+					<td>Misc</td>
+					
+				</tr>
+			</tbody>
+		</table>
+
+</body>
+</html>

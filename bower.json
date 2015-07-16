@@ -1,0 +1,7 @@
+{
+	"name": "PFCS_mockup",
+	"version": "1",
+  "dependencies": {
+    "angular": "~1.4.1"
+  }
+}
