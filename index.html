@@ -62,7 +62,6 @@
 			</tr>
 		</tbody>
 	</table>
-		
 	</div>
 
 	<div class="row col-xs-5 col-sm-5 col-md-5 form-inline">
@@ -78,16 +77,17 @@
 			  					<!-- repeat to have options be the classes -->
 			  					<option ng-repeat="(key, value) in ClassScope">{{key}}</option>
 							</select>
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="submit" class="btn btn-primary">Add</button>
 						</tr>
 					</thead>
 					<tbody>
 						<!-- dropdown for selecting class level -->
 						<tr ng-repeat="(key, value) in ClassScope">
-							<td>{{key}}</td>
+							<td ng-model="ActiveClassName">{{key}}</td>
 							<td>
-								<select class="form-control">
-									<option ng-repeat="(key, value) in value">{{value.ClassLevel}}</option>
+								<select class="form-control" ng-change="updateClassLevel(key, level)" ng-model="level">
+									<option ng-model="ActiveClassLevel" ng-repeat="(k, r) in value" value="{{r.ClassLevel}}">{{r.ClassLevel}}
+									</option>
 								</select>
 							</td>
 						</tr>
@@ -95,8 +95,10 @@
 				</div>
 			</table>
 	</div>
-
   </div>
+
+
+  		<!-- stats for character -->
   		<table class="table table-hover table-responsive">
 			<thead>
 				<tr>
@@ -160,7 +162,7 @@
 				<tr>
 				
 					<td>Base Attack Bonus</td>
-					<th>{{stats.BaseAttackBonus}}</th>
+					<th>{{TotalBaseAttackBonus}}</th>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -174,7 +176,7 @@
 				<tr>
 				
 					<td>CMD</td>
-					<th>{{stats.BaseAttackBonus + getModifier(stats.Strength) + getModifier(stats.Dexterity) + stats.SizeMod + stats.MiscCMD +10}}</th>
+					<th>{{TotalBaseAttackBonus + getModifier(stats.Strength) + getModifier(stats.Dexterity) + stats.SizeMod + stats.MiscCMD +10}}</th>
 					<td>10 + BAB</td>
 					<td></td>
 					<td></td>
@@ -188,9 +190,24 @@
 				</tr>
 				<tr>
 				
+					<td>CMB</td>
+					<th>{{TotalBaseAttackBonus + getModifier(stats.Strength) + getModifier(stats.Dexterity) + stats.SizeMod + stats.MiscCMD}}</th>
+					<td>+ BAB</td>
+					<td></td>
+					<td></td>
+					<td>{{getModifier(stats.Dexterity) + getModifier(stats.Strength)}}</td>
+					<td>{{stats.SizeMod}}</td>
+					<td></td>
+					<td></td>
+					<td>{{stats.MiscCMD}}</td>
+
+
+				</tr>
+				<tr>
+				
 					<td>Fortitude</td>
-					<th>{{stats.BaseFort + getModifier(stats.Constitution) + stats.MagicMod + stats.MiscMod + stats.TempMod}}</th>
-					<td>{{stats.BaseFort}}</td>
+					<th>{{TotalBaseFort + getModifier(stats.Constitution) + stats.MagicMod + stats.MiscMod + stats.TempMod}}</th>
+					<td>{{TotalBaseFort}}</td>
 					<td></td>
 					<td></td>
 					<td>{{getModifier(stats.Constitution)}}</td>
@@ -204,8 +221,8 @@
 				<tr>
 				
 					<td>Reflex</td>
-					<th>{{stats.BaseRef + getModifier(stats.Dexterity) + stats.MagicRef + stats.MiscRef + stats.TempRef}}</th>
-					<td>{{stats.BaseRef}}</td>
+					<th>{{TotalBaseRef + getModifier(stats.Dexterity) + stats.MagicRef + stats.MiscRef + stats.TempRef}}</th>
+					<td>{{TotalBaseRef}}</td>
 					<td> </td>
 					<td> </td>
 					<td>{{getModifier(stats.Dexterity)}}</td>
@@ -218,8 +235,8 @@
 				<tr>
 				
 					<td>Will</td>
-					<th>{{stats.BaseWill + getModifier(stats.Wisdom) + stats.MagicWill + stats.MiscWill + stats.TempWill}}</th>
-					<td>{{stats.BaseWill}}</td>
+					<th>{{TotalBaseWill + getModifier(stats.Wisdom) + stats.MagicWill + stats.MiscWill + stats.TempWill}}</th>
+					<td>{{TotalBaseWill}}</td>
 					<td></td>
 					<td></td>
 					<td>{{getModifier(stats.Wisdom)}}</td>
@@ -250,7 +267,7 @@
 					<th>{{rank + ClassSkills + MiscSkills + getModifier(stats[value])}}</th>
 					<td>{{ getModifier(stats[value]) }}</td>
 					<td><input type="number" ng-model="rank"  class="form-control"></td>
-					<td>Class</td>
+					<td gn-model="ClassSkillCheck" ng-repeat="(key, v) in value">{{key[v]}}}</td>
 					<td>Misc</td>
 					
 				</tr>

@@ -40,9 +40,9 @@ app.controller('CharacterStats', ['$scope', function($scope) {
 	$scope.Skillscope = skillsList;
 	$scope.ClassScope = class_data;
 	console.log($scope.stats[skillsList.Acrobatics]);
-	console.log(class_data.Druid[17].BaseWill);
+	
 	// $scope.ModValue = $scope.stats[skillsList.Skills.ModType];
-
+	$scope.Ranger5 =  class_data;
 	$scope.Math = window.Math;
 
 	$scope.getModifier = function(stat){
@@ -55,11 +55,69 @@ app.controller('CharacterStats', ['$scope', function($scope) {
 		return "hi "+name;
 	};
 
-	$scope.ClassSelect = function(){
+	$scope.updateClassLevel = function(key, level){
+		// return Ranger5.key[level].BaseAttackBonus;
+		$scope.BaseAttackBonus = $scope.BaseAttackBonus || {};
+		// console.log(key,level);
+		// console.log("BaseAttackBonus", class_data[key][level].BaseAttackBonus);
+		$scope.BaseAttackBonus[key] = class_data[key][level].BaseAttackBonus;
+		// console.log("$scope.BaseAttackBonus ", $scope.BaseAttackBonus);
+		// return Ranger5.key[level].BaseAttackBonus;
+		$scope.TotalBaseAttackBonus = 0;
+		for (var k in $scope.BaseAttackBonus) {
+			console.log(Object.prototype.toString.call($scope.BaseAttackBonus[k]));
+			if (Object.prototype.toString.call($scope.BaseAttackBonus[k]) === '[object Array]'){
+				$scope.TotalBaseAttackBonus += $scope.BaseAttackBonus[k][0];
+				console.log($scope.BaseAttackBonus[k][0]);
+			} else {$scope.TotalBaseAttackBonus += $scope.BaseAttackBonus[k];}
 
-	}
+		}
+
+		$scope.BaseFort = $scope.BaseFort || {};
+		// console.log(key,level);
+		// console.log("BaseFort", class_data[key][level].BaseFort);
+		$scope.BaseFort[key] = class_data[key][level].BaseFort;
+		// console.log("$scope.BaseFort ", $scope.BaseFort);
+		// return Ranger5.key[level].BaseFort;
+		$scope.TotalBaseFort = 0;
+		for (var key in $scope.BaseFort) {
+			$scope.TotalBaseFort += $scope.BaseFort[key];
+		}
+
+		$scope.BaseRef = $scope.BaseRef || {};
+		// console.log(key,level);
+		// console.log("BaseRef", class_data[key][level].BaseRef);
+		$scope.BaseRef[key] = class_data[key][level].BaseRef;
+		// console.log("$scope.BaseRef ", $scope.BaseRef);
+		// return Ranger5.key[level].BaseRef;
+		$scope.TotalBaseRef = 0;
+		for (var key in $scope.BaseRef) {
+			$scope.TotalBaseRef += $scope.BaseRef[key];
+		}
+
+		$scope.BaseWill = $scope.BaseWill || {};
+		// console.log(key,level);
+		// console.log("BaseWill", class_data[key][level].BaseWill);
+		$scope.BaseWill[key] = class_data[key][level].BaseWill;
+		// console.log("$scope.BaseWill ", $scope.BaseWill);
+		// return Ranger5.key[level].BaseWill;
+		$scope.TotalBaseWill = 0;
+		for (var key in $scope.BaseWill) {
+			$scope.TotalBaseWill += $scope.BaseWill[key];
+		}
 
 
+		$scope.ClassSkill = $scope.ClassSkill || {};
+		// console.log(key,level);
+		// console.log("BaseWill", class_data[key][level].BaseWill);
+		$scope.ClassSkill[k] = class_data[k][0];
+		// console.log("$scope.ClassSkill ", $scope.ClassSkill);
+		// return Ranger5.key[level].ClassSkill;
+		$scope.TotalClassSkill = 0;
+		for (var key in $scope.ClassSkill) {
+			$scope.TotalClassSkill += $scope.ClassSkill[key];
+		}
+	};
 
 		$scope.skillsPoints = {
 		"Acrobatics": 0,
