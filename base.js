@@ -3,6 +3,10 @@ var app = angular.module('PFCSapp', []);
 
 
 app.controller('CharacterStats', ['$scope', function($scope) {
+
+	//$scope.SkillSheetMaster = loadSkillSheet(); //loading from localstorage
+	
+	// $scope.SkillSheetMaster.stats = $scope.SkillSheetMaster.stats || {...the object below...}
 	$scope.stats = {
 		"Strength": 10,
 		"Dexterity": 10,
@@ -54,6 +58,10 @@ app.controller('CharacterStats', ['$scope', function($scope) {
 	$scope.hello = function(name){
 		return "hi "+name;
 	};
+	$scope.ActiveClasses = []
+	$scope.AddClass = function(classtype){
+		$scope.ActiveClasses.push(classtype);
+	}
 
 	$scope.updateClassLevel = function(key, level){
 		// return Ranger5.key[level].BaseAttackBonus;
@@ -80,8 +88,8 @@ app.controller('CharacterStats', ['$scope', function($scope) {
 		// console.log("$scope.BaseFort ", $scope.BaseFort);
 		// return Ranger5.key[level].BaseFort;
 		$scope.TotalBaseFort = 0;
-		for (var key in $scope.BaseFort) {
-			$scope.TotalBaseFort += $scope.BaseFort[key];
+		for (var key1 in $scope.BaseFort) {
+			$scope.TotalBaseFort += $scope.BaseFort[key1];
 		}
 
 		$scope.BaseRef = $scope.BaseRef || {};
@@ -91,8 +99,8 @@ app.controller('CharacterStats', ['$scope', function($scope) {
 		// console.log("$scope.BaseRef ", $scope.BaseRef);
 		// return Ranger5.key[level].BaseRef;
 		$scope.TotalBaseRef = 0;
-		for (var key in $scope.BaseRef) {
-			$scope.TotalBaseRef += $scope.BaseRef[key];
+		for (var key2 in $scope.BaseRef) {
+			$scope.TotalBaseRef += $scope.BaseRef[key2];
 		}
 
 		$scope.BaseWill = $scope.BaseWill || {};
@@ -102,8 +110,8 @@ app.controller('CharacterStats', ['$scope', function($scope) {
 		// console.log("$scope.BaseWill ", $scope.BaseWill);
 		// return Ranger5.key[level].BaseWill;
 		$scope.TotalBaseWill = 0;
-		for (var key in $scope.BaseWill) {
-			$scope.TotalBaseWill += $scope.BaseWill[key];
+		for (var key3 in $scope.BaseWill) {
+			$scope.TotalBaseWill += $scope.BaseWill[key3];
 		}
 
 
@@ -114,8 +122,8 @@ app.controller('CharacterStats', ['$scope', function($scope) {
 		// console.log("$scope.ClassSkill ", $scope.ClassSkill);
 		// return Ranger5.key[level].ClassSkill;
 		$scope.TotalClassSkill = 0;
-		for (var key in $scope.ClassSkill) {
-			$scope.TotalClassSkill += $scope.ClassSkill[key];
+		for (var key4 in $scope.ClassSkill) {
+			$scope.TotalClassSkill += $scope.ClassSkill[key4];
 		}
 	};
 
@@ -124,9 +132,9 @@ app.controller('CharacterStats', ['$scope', function($scope) {
 		"Appraise": 0,
 		"Bluff": 0,
 		"Climb": 0,
-		"Craft": 0,
-		"Craft": 0,
-		"Craft": 0,
+		"Craft1": 0,
+		"Craft2": 0,
+		"Craft3": 0,
 		"Diplomacy": 0,
 		"Disable Device*": 0,
 		"Disguise": 0,
@@ -147,11 +155,11 @@ app.controller('CharacterStats', ['$scope', function($scope) {
 		"Knowledge (Religion)*": 0,
 		"Linguistics*": 0,
 		"Perception": 0,
-		"Perform": 0,
-		"Perform": 0,
-		"Profession*": 0,
-		"Profession*": 0,
-		"Ride": 0, 
+		"Perform1": 0,
+		"Perform2": 0,
+		"Profession1": 0,
+		"Profession2": 0,
+		"Ride": 0,
 		"Sense Motive": 0,
 		"Sleight of Hand*": 0,
 		"Spellcraft*": 0,

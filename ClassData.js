@@ -1,6 +1,11 @@
 var class_data = {
   "Ranger": [
-  {
+  { 
+      "ClassLevel": 0,
+      "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
   },
     {
       "ClassLevel": 1,
@@ -257,7 +262,11 @@ var class_data = {
 
 
   "Bard": [
-  {
+  {"ClassLevel": 0,
+    "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
     
   },
     {
@@ -694,7 +703,11 @@ var class_data = {
 
   "Barbarian": [
   {
-    
+    "ClassLevel": 0,
+    "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
   },
     {
       "ClassLevel": 1,
@@ -873,7 +886,11 @@ var class_data = {
 
   "Cleric": [
   {
-    
+    "ClassLevel": 0,
+    "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
   },
     {
       "ClassLevel": 1,
@@ -1251,6 +1268,11 @@ var class_data = {
 
   "Druid": [
   {
+    "ClassLevel": 0,
+    "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
     
   },
     {
@@ -1629,6 +1651,11 @@ var class_data = {
 
 "Fighter": [
 {
+  "ClassLevel": 0,
+  "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
   
 },
     {
@@ -1806,7 +1833,11 @@ var class_data = {
 
 
 "Monk": [
-{
+{"ClassLevel": 0,
+  "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
   
 },
     {
@@ -2067,7 +2098,11 @@ var class_data = {
 
   "Paladin": [
   {
-    
+    "ClassLevel": 0,
+    "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
   },
     { 
       "ClassLevel": 1,
@@ -2327,7 +2362,11 @@ var class_data = {
 
 "Rogue": [
     {
-      
+      "ClassLevel": 0,
+      "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
     },
     {
       "ClassLevel": 1,
@@ -2505,6 +2544,11 @@ var class_data = {
 
 "Sorcerer": [
 {
+  "ClassLevel": 0,
+  "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
   
 },
     {
@@ -3063,6 +3107,11 @@ var class_data = {
 
 "Wizard": [
 {
+  "ClassLevel": 0,
+  "BaseAttackBonus": 0,
+      "BaseFort": 0,
+      "BaseRef": 0,
+      "BaseWill": 0,
   
 },
     {

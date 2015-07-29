@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>-->
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-  <script type="text/javascript" src="ClassData.json"></script>
+  <script type="text/javascript" src="ClassData.js"></script>
   <script type="text/javascript" src="base.js"></script>
   <script type="text/javascript" src="SkillsData.js"></script>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -75,17 +75,20 @@
 							<select class="form-control">
 			  					<option>Select Class</option>
 			  					<!-- repeat to have options be the classes -->
-			  					<option ng-repeat="(key, value) in ClassScope">{{key}}</option>
+			  					<option ng-repeat="(key, value) in ClassScope" ng-model="ClassName">{{key}}</option>
+
 							</select>
-							<button type="submit" class="btn btn-primary">Add</button>
+							<!-- add class to table button -->
+							<button ng-click="AddClass(ClassName)" class="btn btn-primary">Add</button>
 						</tr>
 					</thead>
 					<tbody>
 						<!-- dropdown for selecting class level -->
-						<tr ng-repeat="(key, value) in ClassScope">
-							<td ng-model="ActiveClassName">{{key}}</td>
+						<tr ng-repeat="(key, value) in ActiveClasses">
+							<td ng-options="(key, value) in ClassScope"></td>
 							<td>
-								<select class="form-control" ng-change="updateClassLevel(key, level)" ng-model="level">
+
+								<select ng-repeat="(key, value) in ClassScope" class="form-control" ng-change="updateClassLevel(key, level)" ng-model="level">
 									<option ng-model="ActiveClassLevel" ng-repeat="(k, r) in value" value="{{r.ClassLevel}}">{{r.ClassLevel}}
 									</option>
 								</select>
@@ -95,7 +98,6 @@
 				</div>
 			</table>
 	</div>
-  </div>
 
 
   		<!-- stats for character -->
@@ -204,9 +206,8 @@
 
 				</tr>
 				<tr>
-				
 					<td>Fortitude</td>
-					<th>{{TotalBaseFort + getModifier(stats.Constitution) + stats.MagicMod + stats.MiscMod + stats.TempMod}}</th>
+					<th>{{TotalBaseFort + getModifier(stats.Constitution) + stats.MagicFort + stats.MiscFort}}</th>
 					<td>{{TotalBaseFort}}</td>
 					<td></td>
 					<td></td>
@@ -214,14 +215,11 @@
 					<td> </td>
 					<td> </td>
 					<td> </td>
-					<td>{{stats.MiscFort}}</td>
-
-					
+					<td>{{stats.MiscFort}}</td>	
 				</tr>
 				<tr>
-				
 					<td>Reflex</td>
-					<th>{{TotalBaseRef + getModifier(stats.Dexterity) + stats.MagicRef + stats.MiscRef + stats.TempRef}}</th>
+					<th>{{TotalBaseRef + getModifier(stats.Dexterity) + stats.MagicRef + stats.MiscRef}}</th>
 					<td>{{TotalBaseRef}}</td>
 					<td> </td>
 					<td> </td>
@@ -229,13 +227,11 @@
 					<td> </td>
 					<td> </td>
 					<td> </td>
-					<td>{{stats.MiscRef}}</td>
-					
+					<td>{{stats.MiscRef}}</td>	
 				</tr>
 				<tr>
-				
 					<td>Will</td>
-					<th>{{TotalBaseWill + getModifier(stats.Wisdom) + stats.MagicWill + stats.MiscWill + stats.TempWill}}</th>
+					<th>{{TotalBaseWill + getModifier(stats.Wisdom) + stats.MagicWill + stats.MiscWill}}</th>
 					<td>{{TotalBaseWill}}</td>
 					<td></td>
 					<td></td>
@@ -244,7 +240,6 @@
 					<td></td>
 					<td></td>
 					<td>{{stats.MiscWill}}</td>
-					
 				</tr>
 			</tbody>
 		</table>
